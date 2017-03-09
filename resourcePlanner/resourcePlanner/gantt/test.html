@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../Content/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="../Content/kendo.material.mobile.min.css" rel="stylesheet" />
+    <link href="../Content/kendo-material.min.css" rel="stylesheet" />
+    <link href="../Content/kendo.common.min.css" rel="stylesheet" />
+    <link href="../Content/kendo.default.min.css" rel="stylesheet" />
+    <link href="../Content/kendo.rtl.min.css" rel="stylesheet" />
+
+    <script src="../Scripts/jquery-1.8.2.min.js"></script>
+    <script src="../Scripts/jszip.min.js"></script>
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/kendo.all.min.js"></script>
+    <script src="../Scripts/pouchdb-6.1.2.min.js"></script>
+    <script src="../Scripts/console.js"></script>
+    <script src="../Scripts/Underscore.js"></script>
+</head>
+<body>
+    <!-- HTML element in which the Kendo UI Gantt will initialize -->
+    <div id="gantt"></div>
+<script>
+    kendo.ui.GanttCustomView = kendo.ui.GanttView.extend({
+        name: "custom",
+        options: {
+            yearHeaderTemplate: kendo.template("#=kendo.toString(start, 'yyyy')#"),
+            quarterHeaderTemplate: kendo.template("# return ['Q1', 'Q2', 'Q3', 'Q4'][start.getMonth() / 3] #"),
+            monthHeaderTemplate: kendo.template("#=kendo.toString(start, 'MMM')#")
+        },
+
+        range: function (range) {
+            this.start = new Date("01/01/2017");
+            this.end = new Date("01/01/2019");
+        },
+
+        _generateSlots: function (incrementCallback, span) {
+            var slots = [];
+            var slotStart = new Date(this.start);
+            var slotEnd;
+
+            while (slotStart < this.end) {
+                slotEnd = new Date(slotStart);
+                incrementCallback(slotEnd);
+                slots.push({ start: slotStart, end: slotEnd, span: span });
+                slotStart = slotEnd;
+            }
+
+            return slots;
+        },
+
+        _createSlots: function () {
+            var slots = [];
+            slots.push(this._generateSlots(function (date) { date.setFullYear(date.getFullYear() + 1); }, 12));
+            slots.push(this._generateSlots(function (date) { date.setMonth(date.getMonth() + 3); }, 3));
+            slots.push(this._generateSlots(function (date) { date.setMonth(date.getMonth() + 1); }, 1));
+            return slots;
+        },
+
+        _layout: function () {
+            var rows = [];
+            var options = this.options;
+            rows.push(this._slotHeaders(this._slots[0], kendo.template(options.yearHeaderTemplate)));
+            rows.push(this._slotHeaders(this._slots[1], kendo.template(options.quarterHeaderTemplate)));
+            rows.push(this._slotHeaders(this._slots[2], kendo.template(options.monthHeaderTemplate)));
+            return rows;
+        }
+    });
+    $("#gantt").kendoGantt({
+        dataSource: [
+            {
+                id: 1,
+                EMP_No: "#1",
+                NAME: "Fiona Fernando",
+                RESOURCE_REGION: "Colombo",
+                PROJECT_ROLE: "Developer",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "UP",
+                RESOURCING_TEAM: "ASHF-0093",
+                SKILL: "6",
+                DESIGNATION: "SE2",
+                percentComplete: 0.5,
+                start: new Date("2017/1/17 9:00"),
+                end: new Date("2017/3/17 9:00"),
+                orderId: 2,
+                title: "Task1"
+            },
+            {
+                id: 2,
+                EMP_No: "#2",
+                NAME: "Sandun Perera",
+                RESOURCE_REGION: "Colombo",
+                PROJECT_ROLE: "Developer",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "UP",
+                RESOURCING_TEAM: "ASHF-0093",
+                SKILL: "6",
+                DESIGNATION: "SE2",
+                percentComplete: 0.5,
+                start: new Date("2017/2/17 9:00"),
+                end: new Date("2017/2/27 9:00"),
+                orderId: 3,
+                title: "Task2"
+            },
+            {
+                id: 3,
+                EMP_No: "#3",
+                NAME: "Allison Jordan ",
+                RESOURCE_REGION: "UK",
+                PROJECT_ROLE: "Developer",
+                ONSITE: "Yes",
+                PROJECT: "GPT",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "Team Lead",
+                percentComplete: 0.5,
+                start: new Date("2017/3/17 9:00"),
+                end: new Date("2017/4/17 9:00"),
+                orderId: 4,
+                title: "Task1"
+            },
+            {
+                id: 4,
+                EMP_No: "#4",
+                NAME: "Kylie Jenner ",
+                RESOURCE_REGION: "UK",
+                PROJECT_ROLE: "Developer",
+                ONSITE: "Yes",
+                PROJECT: "GPT",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "Team Lead",
+                percentComplete: 0.5,
+                start: new Date("2017/2/17 9:00"),
+                end: new Date("2017/3/17 9:00"),
+                orderId: 5,
+                title: "Task1"
+            },
+            {
+                id: 5,
+                EMP_No: "#5",
+                NAME: "Karlie Kloss ",
+                RESOURCE_REGION: "UK",
+                PROJECT_ROLE: "Developer",
+                ONSITE: "Yes",
+                PROJECT: "GPT",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "Team Lead",
+                percentComplete: 0.5,
+                start: new Date("2017/4/17 9:00"),
+                end: new Date("2017/5/17 9:00"),
+                orderId: 6,
+                title: "Task1"
+            },
+            {
+                id: 6,
+                EMP_No: "#6",
+                NAME: "Anuradha ",
+                RESOURCE_REGION: "UK",
+                PROJECT_ROLE: "Developer",
+                ONSITE: "Yes",
+                PROJECT: "GPT",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "Team Lead",
+                percentComplete: 0.5,
+                start: new Date("2017/1/17 9:00"),
+                end: new Date("2017/3/17 9:00"),
+                orderId: 7,
+                title: "Task1"
+            }
+        ],
+        dependencies: [
+            //{ "id": 1, "predecessorId": 1, "successorId": 2, "type": 1 },
+            //{ "id": 1, "predecessorId": 2, "successorId": 4, "type": 1 },
+            //{ "id": 1, "predecessorId": 3, "successorId": 5, "type": 1 }
+        ],
+        views: [
+                             "week",
+                             { type: "kendo.ui.GanttCustomView", title: "Quaterly", selected: true }
+        ]
+    });
+</script>
+</body>
+</html>

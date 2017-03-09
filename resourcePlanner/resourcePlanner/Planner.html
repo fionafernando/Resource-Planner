@@ -1,0 +1,589 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="Content/kendo.common.min.css" rel="stylesheet" />
+    <link href="Content/kendo.default.min.css" rel="stylesheet" />
+    <link href="Content/kendo.default.mobile.min.css" rel="stylesheet" />
+    <script src="Scripts/lib/jquery.min.js"></script>
+    <script src="Scripts/lib/kendo.all.min.js"></script>
+    <script src="Scripts/Underscore.js"></script>
+</head>
+<body>
+    <div id="example">
+        <div id="grid"></div>
+        <style>
+            .red {
+                background-color: red;
+            }
+            .orange {
+                background-color: orange;
+            }
+            .gray {
+                background-color: gray;
+            }
+            .green {
+                background-color: green;
+            }
+        </style>
+    <script>
+        var array = [
+            {
+                id: 1,
+                USERID: 1,
+                EMP_No: "#1",
+                NAME: "Fiona Fernando",
+                RESOURCE_REGION: "SRI LANKA",
+                PROJECT_ROLE: "SE",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "UP",
+                RESOURCING_TEAM: "ASHF-0093",
+                SKILL: "6",
+                DESIGNATION: "SE2",
+                percentComplete: 0.5,
+                start: new Date("2017/1/17 9:00"),
+                end: new Date("2017/3/17 9:00"),
+                orderId: 2,
+                title: "PLM Support",
+                COMMENT: "Good",
+                IsPSA : false
+            },
+            {
+                id: 2,
+                USERID: 2,
+                EMP_No: "#2",
+                NAME: "Sandun Perera",
+                RESOURCE_REGION: "SRI LANKA",
+                PROJECT_ROLE: "SSE",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "UP",
+                RESOURCING_TEAM: "ASHF-0093",
+                SKILL: "6",
+                DESIGNATION: "Senior Software Engineer",
+                percentComplete: 0.5,
+                start: new Date("2017/2/17 9:00"),
+                end: new Date("2017/2/27 9:00"),
+                orderId: 3,
+                title: "GPT - Fiori",
+                COMMENT: "Good",
+                IsPSA: true
+            },
+            {
+                id: 3,
+                EMP_No: "#3",
+                USERID: 3,
+                NAME: "Chandana Devarathne",
+                RESOURCE_REGION: "SRI LANKA",
+                PROJECT_ROLE: "QA",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "QA",
+                percentComplete: 0.5,
+                start: new Date("2017/3/17 9:00"),
+                end: new Date("2017/4/17 9:00"),
+                orderId: 4,
+                title: "PLM Support",
+                COMMENT: "Good",
+                IsPSA: false
+            },
+            {
+                id: 4,
+                USERID: 4,
+                EMP_No: "#4",
+                NAME: "Nilusha Dharmapala",
+                RESOURCE_REGION: "SRI LANKA",
+                PROJECT_ROLE: "SE",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "Software Engineer",
+                percentComplete: 0.5,
+                start: new Date("2017/2/17 9:00"),
+                end: new Date("2017/3/17 9:00"),
+                orderId: 5,
+                title: "PLM Support",
+                COMMENT: "Good",
+                IsPSA: false
+            },
+            {
+                id: 5,
+                USERID: 5,
+                EMP_No: "#5",
+                NAME: "Thanushka Gunasekara ",
+                RESOURCE_REGION: "SRI LANKA",
+                PROJECT_ROLE: "PM",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "Technical Consultant",
+                percentComplete: 0.5,
+                start: new Date("2017/4/17 9:00"),
+                end: new Date("2017/5/17 9:00"),
+                orderId: 6,
+                title: "PLM Support",
+                COMMENT: "Good",
+                IsPSA: true
+            },
+            {
+                id: 6,
+                USERID: 6,
+                EMP_No: "#6",
+                RESOURCE_REGION: "SRI LANKA",
+                PROJECT_ROLE: "SE",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "Senior Software Engineer",
+                percentComplete: 0.5,
+                start: new Date("2017/1/17 9:00"),
+                end: new Date("2017/3/17 9:00"),
+                orderId: 7,
+                title: "PLM Support",
+                COMMENT: "Good",
+                IsPSA: false
+            },
+            {
+                id: 7,
+                USERID: 7,
+                EMP_No: "#7",
+                RESOURCE_REGION: "SRI LANKA",
+                PROJECT_ROLE: "TL",
+                ONSITE: "Yes",
+                PROJECT: "PLM",
+                CONFIRMATION_LEVEL: "N/A",
+                RESOURCING_TEAM: "ASHF-93292",
+                SKILL: "3",
+                DESIGNATION: "Technical Consultant",
+                percentComplete: 0.5,
+                start: new Date("2017/2/17 9:00"),
+                end: new Date("2017/3/17 9:00"),
+                orderId: 8,
+                title: "PLM Support",
+                COMMENT: "Good",
+                IsPSA:true
+            },
+             {
+                 id: 8,
+                 EMP_No: "#8",
+                 USERID: 8,
+                 RESOURCE_REGION: "SRI LANKA",
+                 PROJECT_ROLE: "TL",
+                 ONSITE: "Yes",
+                 PROJECT: "PLM",
+                 CONFIRMATION_LEVEL: "N/A",
+                 RESOURCING_TEAM: "ASHF-93292",
+                 SKILL: "3",
+                 DESIGNATION: "Technical Consultant",
+                 percentComplete: 0.5,
+                 start: new Date("2017/2/17 9:00"),
+                 end: new Date("2017/3/17 9:00"),
+                 orderId: 9,
+                 title: "PLM Support",
+                 COMMENT: "Good",
+                 IsPSA: false
+             },
+              {
+                  id: 9,
+                  EMP_No: "#9",
+                  USERID: 9,
+                  RESOURCE_REGION: "SRI LANKA",
+                  PROJECT_ROLE: "TL",
+                  ONSITE: "Yes",
+                  PROJECT: "PLM",
+                  CONFIRMATION_LEVEL: "N/A",
+                  RESOURCING_TEAM: "ASHF-93292",
+                  SKILL: "3",
+                  DESIGNATION: "Technical Consultant",
+                  percentComplete: 0.5,
+                  start: new Date("2017/2/17 9:00"),
+                  end: new Date("2017/3/17 9:00"),
+                  orderId: 10,
+                  title: "PLM Support",
+                  COMMENT: "Good",
+                  IsPSA: true
+              },
+                {
+                    id: 10,
+                    USERID: 10,
+                    EMP_No: "#10",
+                    RESOURCE_REGION: "SRI LANKA",
+                    PROJECT_ROLE: "TL",
+                    ONSITE: "Yes",
+                    PROJECT: "PLM",
+                    CONFIRMATION_LEVEL: "N/A",
+                    RESOURCING_TEAM: "ASHF-93292",
+                    SKILL: "3",
+                    DESIGNATION: "Technical Consultant",
+                    percentComplete: 0.5,
+                    start: new Date("2017/2/17 9:00"),
+                    end: new Date("2017/3/17 9:00"),
+                    orderId: 11,
+                    title: "PLM Support",
+                    COMMENT: "Good",
+                    IsPSA: false
+                },
+               {
+                   id: 11,
+                   USERID : 11,
+                   EMP_No: "#11",
+                   RESOURCE_REGION: "SRI LANKA",
+                   PROJECT_ROLE: "TL",
+                   ONSITE: "Yes",
+                   PROJECT: "PLM",
+                   CONFIRMATION_LEVEL: "N/A",
+                   RESOURCING_TEAM: "ASHF-93292",
+                   SKILL: "3",
+                   DESIGNATION: "Technical Consultant",
+                   percentComplete: 0.5,
+                   start: new Date("2017/2/17 9:00"),
+                   end: new Date("2017/3/17 9:00"),
+                   orderId: 12,
+                   title: "PLM Support",
+                   COMMENT: "Good",
+                   IsPSA: false
+               },
+               {
+                   id: 12,
+                   USERID : 12,
+                   EMP_No: "#12",
+                   RESOURCE_REGION: "SRI LANKA",
+                   PROJECT_ROLE: "TL",
+                   ONSITE: "Yes",
+                   PROJECT: "PLM",
+                   CONFIRMATION_LEVEL: "N/A",
+                   RESOURCING_TEAM: "ASHF-93292",
+                   SKILL: "3",
+                   DESIGNATION: "Technical Consultant",
+                   percentComplete: 0.5,
+                   start: new Date("2017/2/17 9:00"),
+                   end: new Date("2017/3/17 9:00"),
+                   orderId: 13,
+                   title: "PLM Support",
+                   COMMENT: "Good",
+                   IsPSA:true
+               }
+        ],
+        users = [{
+            "value": 1,
+            "text": "Fiona Fernando"
+        },{
+            "value": 2,
+            "text": "Sandun Perera"
+        },{
+            "value": 3,
+            "text": "Chandana Devarathne"
+        },{
+            "value": 4,
+            "text": "Nilusha Dharmapala"
+        },{
+            "value": 5,
+            "text": "Thanushka Gunasekara"
+        },{
+            "value": 6,
+            "text": "Uwaisul Karnain"
+        },{
+            "value": 7,
+            "text": "Suzanne Fiona"
+        },{
+            "value": 8,
+            "text": "Jane Eyer"
+        },
+        {
+            "value": 9,
+            "text": "Ahila Arumugam"
+        },
+        {
+            "value": 10,
+            "text": "Divya Subramanium"
+        },
+        {
+            "value": 11,
+            "text": "Hasitha Liyanage"
+        },
+        {
+            "value": 12,
+            "text": "Niranjan Balachandran"
+        }];
+   function onDataBound(e) {
+            var grid = $("#grid").data("kendoGrid"),
+            gridData = grid.dataSource.view(),
+            currenRow;
+       
+            for (var i = 0; i < gridData.length; i++) {
+                var currentUid = gridData[i].uid;
+                var psaAlloc = gridData[i].PSAAlloc.split(',');
+                var nonPsaAlloc = gridData[i].NONPSAAlloc.split(',');
+
+                if (gridData[i].IsPSA == true) {
+                    currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+                    //currenRow = grid.table.find("tr[data-uid='" + currentUid + "']")[0].cells[11].innerHTML
+                    _.each(psaAlloc,
+                        function(x) {
+                            var cell = currenRow.cells[x];
+                            $(currenRow).addClass("green");
+                        });
+                }
+                else {
+                    for(var y = 0)
+                    currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+                    $(currenRow).addClass("orange");
+                }
+            }
+        };
+    $(document).ready(function() {
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: array,
+                pageSize: 10
+            },
+            dataBound: onDataBound,
+            editable: true,
+            height: 550,
+            groupable: true,
+            sortable: true,
+            resizable: true,
+            reorderable: true,
+            batch: true,
+            autoSync: true,
+            pageable: true,
+    columns: [
+    {
+        title: "Resource Assignment",
+        attributes: { style:'background-color: orange'},
+        columns: [
+            {
+                field: "EMP_No",
+                title: "Emp No",
+                width: 50,
+                sortable: true,
+                type: "number",
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                }
+            },
+            {
+                field: "NAME",
+                title: "Name",
+                width: 140,
+                sortable: true,
+                type: "string",
+                values: users,
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                },
+                template: function (dataItem) {
+                    var value = dataItem.USERID;
+                    var text = $.grep(users, function (item) {
+                        return item.value == value;
+                    })[0].text;
+
+                    return text;
+                }
+            },
+            {
+                field: "RESOURCE_REGION",
+                title: "Resource Region",
+                width: 130,
+                sortable: true,
+                type: "string",
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                }
+            },
+            {
+                field: "PROJECT_ROLE",
+                title: "Project Role",
+                width: 90,
+                sortable: true,
+                type: "string",
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                }
+            },
+            {
+                field: "ONSITE",
+                title: "OnSite",
+                width: 60,
+                sortable: true,
+                type: "string",
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                }
+            }
+        ]
+    },
+    {
+        title: "Project Requirement",
+        attributes: "style='background-color:red'",
+        columns: [
+            {
+                field: "PROJECT",
+                title: "Project",
+                width: 100,
+                sortable: true,
+                type: "string",
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                }
+            },
+            {
+                field: "CONFIRMATION_LEVEL",
+                title: "Confirmation Level",
+                sortable: true,
+                width: 100,
+                type: "string",
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                }
+            },
+            {
+                field: "RESOURCING_TEAM",
+                title: "Resourcing Team",
+                sortable: true,
+                width: 100,
+                type: "string",
+                filterable: {
+                    multi: true,
+                   dataSource: array
+                }
+            },
+            {
+                field: "SKILL",
+                title: "Skill",
+                width: 60,
+                sortable: true,
+                type: "string",
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                }
+            },
+            {
+                field: "DESIGNATION",
+                title: "Designation",
+                sortable: true,
+                width: 100,
+                type: "string",
+                filterable: {
+                    multi: true,
+                    dataSource: array
+                }
+            },
+            {
+                field: "JAN",
+                title: "JAN",
+                width: 80,
+                sortable: true,
+                type: "string"
+            },
+            {
+                field: "FEB",
+                title: "FEB",
+                width: 80,
+                sortable: true,
+                type: "string"
+            },
+            {
+                field: "MAR",
+                title: "MAR",
+                width: 90,
+                sortable: true,
+                type: "string"
+            },
+            {
+                field: "APR",
+                title: "APR",
+                width: 90,
+                sortable: true,
+                type: "string"
+            },
+            {
+                field: "MAY",
+                title: "MAY",
+                sortable: true,
+                width: 90,
+                type: "string"
+            },
+            {
+                field: "JUN",
+                title: "JUN",
+                sortable: true,
+                width: 80,
+                type: "string"
+            },
+            {
+                field: "JUL",
+                title: "JUL",
+                sortable: true,
+                width: 80,
+                type: "string"
+            },
+            {
+                field: "AUG",
+                title: "AUG",
+                sortable: true,
+                width: 90,
+                type: "string"
+            },
+            {
+                field: "SEP",
+                title: "SEP",
+                sortable: true,
+                width: 80,
+                type: "string"
+            },
+            {
+                field: "OCT",
+                title: "OCT",
+                sortable: true,
+                width: 80,
+                type: "string"
+            },
+            {
+                field: "NOV",
+                title: "NOV",
+                sortable: true,
+                width: 90,
+                type: "string"
+            },
+            {
+                field: "DEC",
+                title: "DEC",
+                sortable: true,
+                width: 80,
+                type: "string"
+            },
+            {
+                field: "COMMENT",
+                title: "Comment",
+                sortable: true,
+                width: 150,
+                type: "string"
+            }
+        ]
+    }
+    ]
+    });
+    });
+    </script>
+    </div>
+</body>
+</html>

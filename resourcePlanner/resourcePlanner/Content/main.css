@@ -1,0 +1,245 @@
+html {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.k-task-draghandle {
+    display: none !important;
+}
+.k-task-dot {
+    display: none !important;
+}
+
+
+/*  main.css Start  */
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #f0f0f0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.rp-body-wrapp{
+    width: 100%;
+    height: auto;
+    display: block;
+    padding: 0 1.6rem;
+    box-sizing: border-box;
+    
+}
+
+.rp-page-header-wrapp{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.rp-page-header-wrapp .rp-page-header{
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    margin: 2rem 0 0 0;
+    display: block;
+    width: 100%;
+}
+
+.rp-page-header-wrapp .rp-header-date{
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 2rem;
+    display: block;
+    font-weight: 500;
+    margin: 0 0 1.4rem 0;
+}
+
+.rp-page-header-wrapp .rp-header-date span{
+    color: #919195;
+}
+
+.rp-page-header-wrapp .rp-header-date span:after{
+    content: ':';
+    padding: 0 8px;
+}
+
+.rp-table-wrapp .k-widget.k-gantt{
+    border: none;
+}
+
+.rp-table-wrapp .k-floatwrap.k-header.k-gantt-toolbar{
+    background: #f0f0f0;
+    padding: 0;
+}
+
+.rp-table-wrapp .k-button{
+    background: #2ecc71;
+    color: #fff;
+    padding: 0 10px;
+    line-height: 35px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.rp-table-wrapp .k-button.k-button-icontext.k-gantt-pdf{
+    background: #3498db;
+}
+
+/*.rp-table-wrapp .k-button:hover{
+    background: #2ecc71;
+}*/
+
+.rp-table-wrapp .k-button .k-icon{
+    color: #fff
+}
+
+.rp-table-wrapp .k-state-default.k-view-week,
+.rp-table-wrapp .k-gantt-toolbar>ul>li{
+    border: none;
+    background: #fff;
+}
+
+.rp-table-wrapp .k-state-default.k-state-selected{
+    background: #fbb040;
+    border:none;
+}
+
+.rp-table-wrapp .k-state-default a{
+    line-height: 35px;
+}
+
+.rp-table-wrapp .k-gantt-treelist table .k-header{
+    background: #919195;
+    border-color: #767678;
+    
+}
+
+.rp-table-wrapp .k-gantt-treelist table .k-header:first-child{
+    background: #86868a;
+}
+
+.rp-table-wrapp .k-gantt-treelist table .k-header a{
+    line-height: 70px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0;
+}
+
+.rp-table-wrapp .k-gantt-timeline table .k-header{
+    background: #dadbdc;
+    border-color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.rp-table-wrapp .k-gantt-timeline table .k-header a{
+    text-transform: uppercase;
+}
+
+.rp-table-wrapp div.k-grid-footer, 
+.rp-table-wrapp div.k-grid-header{
+    padding-right: 0;
+}
+
+.rp-table-wrapp .k-grid-content .k-alt{
+    background: #f5f5f5;
+}
+
+.rp-table-wrapp .k-task{
+    border: none !important;
+}
+
+.rp-table-wrapp .k-gantt .k-task-template{
+    padding: 0.623em 1.4em .623em .6em;
+}
+
+.rp-table-wrapp .k-gantt .k-task-single{
+    margin-top: -4px;
+    border-radius: 3px;
+    background: rgba(251, 176, 64, 0.33);
+    border: 1px solid #fbb040;
+}
+
+.rp-table-wrapp .k-event, 
+.rp-table-wrapp .k-event .k-link, 
+.rp-table-wrapp .k-more-events, 
+.rp-table-wrapp .k-task-complete, 
+.rp-table-wrapp .k-task-single{
+    border-radius: 0;
+}
+
+.rp-table-wrapp .k-event, .k-task-complete{
+    background: #fbb040;
+    color: #fff;
+}
+
+.rp-table-wrapp .k-grid tr:hover{
+    background: #dadbdc;
+}
+
+.rp-table-wrapp div.k-gantt-layout.k-gantt-treelist{
+    border-left: 1px solid #d5d5d5;
+    /*border-bottom: 1px solid #86868a;*/
+}
+
+.rp-table-wrapp div.k-gantt-layout.k-gantt-timeline{
+    border-right: 1px solid #d5d5d5;
+}
+
+
+.rp-table-wrapp .k-gantt-actions, 
+.rp-table-wrapp .k-gantt-toolbar>ul{
+    padding: 1rem 0 0 0;
+    background: transparent;
+}
+
+.rp-table-wrapp .k-grid-content{
+    background: #fff;
+}
+
+/*----scrollbar ------*/
+
+.rp-table-wrapp ::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+    border-top: 1px solid #d5d5d5;
+}
+.rp-table-wrapp ::-webkit-scrollbar-button {
+    background: #fbb040;
+    height: 2px;
+}
+.rp-table-wrapp ::-webkit-scrollbar-track-piece {
+    background: #fff
+}
+.rp-table-wrapp ::-webkit-scrollbar-thumb {
+    background: #fbb040;
+    height: 2px;
+    
+    margin: 2px;
+    border-radius: 6px;
+}
+
+/* -- table raws resize -- */
+
+.k-gantt .k-grid-content tr, .k-gantt-rows tr, .k-gantt-tasks tr{
+    height: 2.5em;
+}
+
+table.k-gantt-tasks{
+    margin-top: 1px;
+}
+
+/*----table header bg classes ----*/
+
+.res-assignment-header{
+    background: #fbb040;
+    display: block;
+}
+
+.pro-requirement-header{
+    background: #ffd18b;
+    display: block;
+}

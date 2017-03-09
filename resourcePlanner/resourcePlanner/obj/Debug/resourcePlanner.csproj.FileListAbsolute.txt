@@ -1,0 +1,17 @@
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\resourcePlanner.dll.config
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\resourcePlanner.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\resourcePlanner.pdb
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\Antlr3.Runtime.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\EntityFramework.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\Newtonsoft.Json.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\System.Web.Optimization.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\WebGrease.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\WebMatrix.Data.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\WebMatrix.WebData.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\Newtonsoft.Json.xml
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\EntityFramework.xml
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\WebMatrix.Data.xml
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\bin\WebMatrix.WebData.xml
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\obj\Debug\resourcePlanner.csprojResolveAssemblyReference.cache
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\obj\Debug\resourcePlanner.dll
+C:\Users\fiona.fernando\Documents\Visual Studio 2013\Projects\resourcePlanner\resourcePlanner\obj\Debug\resourcePlanner.pdb

@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html manifest="app.manifest">
+<head>
+    <style>
+        
+    </style>
+    <title></title>
+    <link href="Content/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="Content/kendo.material.mobile.min.css" rel="stylesheet" />
+    <!--<link href="Content/kendo-material.min.css" rel="stylesheet" />-->
+    <link href="Content/kendo.common.min.css" rel="stylesheet" />
+    <link href="Content/kendo.default.min.css" rel="stylesheet" />
+    <link href="Content/kendo.rtl.min.css" rel="stylesheet" />
+
+    <link href="Content/main.css" rel="stylesheet" />
+    <script src="Scripts/lib/jquery.min.js"></script>
+    <script src="Scripts/lib/jszip.min.js"></script>
+    <script src="Scripts/lib/angular.min.js"></script>
+    <script src="Scripts/lib/kendo.all.min.js"></script>   
+    <script src="Scripts/Underscore.js"></script>
+    
+</head>
+<body>
+    <h1 class="k-header" style="color: gray; height: 44px; text-align: LEFT; margin-left: 27px; margin-right: 27px; ">Resource Planner</h1>
+    <h2 class="k-header" style="color: gray; height: 44px; text-align: LEFT; margin-left: 27px; margin-right: 27px; ">Year :  2017</h2>
+    <label class="k-header" style="background-color: #ffc966; color: #ffc966; margin-left: 27px;"> '                ' </label>
+    <label style="margin: 0px 0px 0px 13px;">PSA</label>
+    <br />
+    <label class="k-header" style="background-color: gray;color: gray;margin-left: 27px;"> '                ' </label>
+    <label style="margin: 0px 0px 0px 13px;">NON PSA</label>
+    <br />
+    <br />
+<div class="rp-body-wrapp">
+    <div class="rp-page-header-wrapp">
+
+    </div>
+
+    <div id="example" class="rp-table-wrapp">
+        <div ng-app="KendoDemo" ng-controller="MyCtrl">
+            <div kendo-gantt k-options="ganttOptions"></div>
+        </div>
+    </div>
+    <div id="pager">
+    </div>
+</div>
+
+
+<script>
+    // Import DejaVu Sans font for embedding
+    // NOTE: Only required if the Kendo UI stylesheets are loaded
+    // from a different origin, e.g. cdn.kendostatic.com
+    kendo.pdf.defineFont({
+        "DejaVu Sans": "Content/fonts/DejaVu/DejaVuSans.ttf",
+        "DejaVu Sans|Bold": "Content/fonts/DejaVu/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic": "Content/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic": "Content/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+    });
+</script>
+<script>
+    angular.module("KendoDemo", ["kendo.directives"])
+        .controller("MyCtrl",
+            function($scope) {
+                var pageIndex = 0,
+                    pageSize = 10,
+                    splicedArr,
+                    initialDataLoad = true,
+                    array = [
+                                {
+                                    id: 1,
+                                    EMP_No: "001",
+                                    NAME: "Dinuk Fernando",
+                                    RESOURCE_REGION: "SRI LANKA",
+                                    PROJECT_ROLE: "SE",
+                                    ONSITE: "Yes",
+                                    PROJECT: "PLM",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "6",
+                                    DESIGNATION: "SE2",
+                                    start: new Date("2017/7/1 9:00"),
+                                    end: new Date("2017/9/30 9:00"),
+                                    orderId: 2,
+                                    title: "GPT - Fiori",
+                                    percentComplete: 0.5,
+                                    isPSA: true
+                                },
+                                {
+                                    id: 2,
+                                    EMP_No: "002",
+                                    NAME: "Sandun Perera",
+                                    RESOURCE_REGION: "SRI LANKA",
+                                    PROJECT_ROLE: "SSE",
+                                    ONSITE: "Yes",
+                                    PROJECT: "PLM",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "6",
+                                    DESIGNATION: "Senior Software Engineer",
+                                    start: new Date("2017/5/1 9:00"),
+                                    end: new Date("2017/6/30 9:00"),
+                                    orderId: 3,
+                                    title: "GPT - Fiori",
+                                    percentComplete: 0.5,
+                                    isPSA: true
+                                },
+                                {
+                                    id: 3,
+                                    EMP_No: "003",
+                                    NAME: "Chandana Devarathne",
+                                    RESOURCE_REGION: "SRI LANKA",
+                                    PROJECT_ROLE: "QA",
+                                    ONSITE: "Yes",
+                                    PROJECT: "PLM",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "3",
+                                    DESIGNATION: "QA",
+                                    start: new Date("2017/3/1 9:00"),
+                                    end: new Date("2017/4/30 9:00"),
+                                    orderId: 4,
+                                    title: "PLM Support",
+                                    percentComplete: 1,
+                                    isPSA: true
+                                },
+                                {
+                                    id: 4,
+                                    EMP_No: "004",
+                                    NAME: "James Forden",
+                                    RESOURCE_REGION: "GERMAN",
+                                    PROJECT_ROLE: "AC",
+                                    ONSITE: "No",
+                                    PROJECT: "PLM",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "3",
+                                    DESIGNATION: "Associate Consultant",
+                                    start: new Date("2017/2/1 9:00"),
+                                    end: new Date("2017/3/31 9:00"),
+                                    orderId: 5,
+                                    title: "Adidas-Germany",
+                                    percentComplete: 0.5,
+                                    isPSA: false
+                                },
+                                {
+                                    id: 5,
+                                    EMP_No: "005",
+                                    NAME: "Thanushka Gunasekara ",
+                                    RESOURCE_REGION: "USA",
+                                    PROJECT_ROLE: "PM",
+                                    ONSITE: "Yes",
+                                    PROJECT: "PLM",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "3",
+                                    DESIGNATION: "Technical Consultant",
+                                    start: new Date("2017/4/1 9:00"),
+                                    end: new Date("2017/4/30 9:00"),
+                                    orderId: 6,
+                                    title: "PLM Support",
+                                    percentComplete: 1,
+                                    isPSA: true
+                                },
+                                {
+                                    id: 6,
+                                    EMP_No: "006",
+                                    NAME: "Alexa Jordan",
+                                    RESOURCE_REGION: "Austrailia",
+                                    PROJECT_ROLE: "SE",
+                                    ONSITE: "Yes",
+                                    PROJECT: "Adidas - Buffer",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "3",
+                                    DESIGNATION: "AC",
+                                    start: new Date("2017/1/1 9:00"),
+                                    end: new Date("2017/3/31 9:00"),
+                                    orderId: 7,
+                                    title: "Support",
+                                    percentComplete: 0.5,
+                                    isPSA: false
+                                },
+                                {
+                                    id: 7,
+                                    EMP_No: "007",
+                                    NAME: "Ahila Arumugam",
+                                    RESOURCE_REGION: "SRI LANKA",
+                                    PROJECT_ROLE: "AC",
+                                    ONSITE: "No",
+                                    PROJECT: "Darwin",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "1",
+                                    DESIGNATION: "SAP -FUNCTIONAL - AC",
+                                    start: new Date("2017/6/1 9:00"),
+                                    end: new Date("2017/6/30 9:00"),
+                                    orderId: 8,
+                                    title: "Darwin Support",
+                                    percentComplete: 0.5,
+                                    isPSA: true
+                                },
+                                {
+                                    id: 8,
+                                    EMP_No: "008",
+                                    NAME: "Namritha Rao",
+                                    RESOURCE_REGION: "India",
+                                    PROJECT_ROLE: "SC",
+                                    ONSITE: "Yes",
+                                    PROJECT: "Nike",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "3",
+                                    DESIGNATION: "Senior Consultant",
+                                    start: new Date("2017/9/1 9:00"),
+                                    end: new Date("2017/9/30 9:00"),
+                                    orderId: 9,
+                                    title: "Nike - Offshore",
+                                    percentComplete: 0.5,
+                                    isPSA: false
+                                },
+                                {
+                                    id: 9,
+                                    EMP_No: "009",
+                                    NAME: "Lee Chang",
+                                    RESOURCE_REGION: "Singapore",
+                                    PROJECT_ROLE: "AC",
+                                    ONSITE: "Yes",
+                                    PROJECT: "HoneyLady",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "3",
+                                    DESIGNATION: "Associate Conslutant",
+                                    start: new Date("2017/7/1 9:00"),
+                                    end: new Date("2017/7/31 9:00"),
+                                    orderId: 10,
+                                    title: "HoneyLady Support",
+                                    percentComplete: 0.5,
+                                    isPSA: true
+                                },
+                                {
+                                    id: 10,
+                                    EMP_No: "010",
+                                    NAME: "Anuradha Madhubashini",
+                                    RESOURCE_REGION: "SRI LANKA",
+                                    PROJECT_ROLE: "SE",
+                                    ONSITE: "Yes",
+                                    PROJECT: "Darwin",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "3",
+                                    DESIGNATION: "Software Engineer",
+                                    start: new Date("2017/5/1 9:00"),
+                                    end: new Date("2017/5/31 9:00"),
+                                    orderId: 11,
+                                    title: "Darwin Support",
+                                    percentComplete: 0.5,
+                                    isPSA: false
+                                },
+                                {
+                                    id: 11,
+                                    EMP_No: "011",
+                                    NAME: "Prabath Abesekara",
+                                    RESOURCE_REGION: "SRI LANKA",
+                                    PROJECT_ROLE: "TL",
+                                    ONSITE: "No",
+                                    PROJECT: "PLM",
+                                    CONFIRMATION_LEVEL: "PipeLine L3",
+                                    RESOURCING_TEAM: "GRC",
+                                    SKILL: "3",
+                                    DESIGNATION: "Technical Consultant",
+                                    start: new Date("2017/10/1 9:00"),
+                                    end: new Date("2017/10/31 9:00"),
+                                    orderId: 12,
+                                    title: "PLM Support",
+                                    percentComplete: 1,
+                                    isPSA: true
+                                }
+                               
+                ],
+                    dependencies = [
+                ];
+
+                $scope.filterchart = function(filterText) {
+                    var chart = $scope.TaskChart;
+                    if (filterText != "") {
+                        chart.dataSource.query({
+                            page: 1,
+                            pageSize: 100,
+                            filter: {
+                                logic: "or",
+                                filters: [
+                                    { field: "title", operator: "contains", value: filterText }
+                                ]
+                            }
+                        });
+                    } else {
+                        chart.dataSource.query({
+                            page: 1,
+                            pageSize: 100
+                        });
+                    }
+                };
+
+                function onAdd(e) {
+                    if (e.task) {
+                        var max = 0;
+                        max = _.max(array, function (task) { return task.id; });
+                        //e.task.id = max.id +1;
+                        e.task.ParentID = null;
+                        e.task.EMP_No = '#' + (max.id + 1);
+                        e.task.NAME = "N/A";
+                        e.task.RESOURCE_REGION = "N/A";
+                        e.task.PROJECT_ROLE = "";
+                        e.task.ONSITE = "N/A";
+                        e.task.PROJECT = "N/A";
+                        e.task.CONFIRMATION_LEVEL = "N/A";
+                        e.task.RESOURCING_TEAM = "N/A";
+                        e.task.SKILL = "N/A";
+                        e.task.DESIGNATION = "N/A";
+                        e.task.start = new Date();
+                        e.task.percentComplete = 0;
+                        e.task.end = new Date(new Date().getTime() + 500 * 60 * 60 * 1000);
+                        e.task.orderId = max.id + 1;
+                        array.push(e.task);
+                        console.log("Task added");
+                    } else {
+                        dependencies.push(e.dependency);
+                        console.log("Task added");
+                    }
+                };
+
+                kendo.ui.GanttCustomView = kendo.ui.GanttView.extend({
+                    name: "custom",
+                    options: {
+                        yearHeaderTemplate: kendo.template("#=kendo.toString(start, 'yyyy')#"),
+                        // quarterHeaderTemplate: kendo.template("# return ['Q1', 'Q2', 'Q3', 'Q4'][start.getMonth() / 3] #"),
+                        monthHeaderTemplate: kendo.template("#=kendo.toString(start, 'MMM')#")
+                    },
+
+                    range: function(range) {
+                        this.start = new Date("01/01/2017");
+                        this.end = new Date("01/01/2018");
+                    },
+
+                    _generateSlots: function(incrementCallback, span) {
+                        var slots = [];
+                        var slotStart = new Date(this.start);
+                        var slotEnd;
+
+                        while (slotStart < this.end) {
+                            slotEnd = new Date(slotStart);
+                            incrementCallback(slotEnd);
+                            slots.push({ start: slotStart, end: slotEnd, span: span });
+                            slotStart = slotEnd;
+                        }
+
+                        return slots;
+                    },
+                    _createSlots: function() {
+                        var slots = [];
+                        slots.push(this._generateSlots(function(date) { date.setFullYear(date.getFullYear() + 1); }, 12));
+                        slots.push(this._generateSlots(function(date) { date.setMonth(date.getMonth() + 3); }, 3));
+                        slots.push(this._generateSlots(function(date) { date.setMonth(date.getMonth() + 1); }, 1));
+                        return slots;
+                    },
+                    _layout: function() {
+                        var rows = [];
+                        var options = this.options;
+                        rows.push(this._slotHeaders(this._slots[0], kendo.template(options.yearHeaderTemplate)));
+                        //rows.push(this._slotHeaders(this._slots[1], kendo.template(options.quarterHeaderTemplate)));
+                        rows.push(this._slotHeaders(this._slots[2], kendo.template(options.monthHeaderTemplate)));
+                        return rows;
+                    }
+                });
+              
+
+                function bindDataSource() {
+                    var startIndex = 1;
+                    if (pager) {
+                        startIndex = (pager.page() - 1) * pager.pageSize();
+                        pager.totalPages(array.length);
+                        splicedArr = array.slice(startIndex, (startIndex + pager.pageSize() - 1));
+                        return splicedArr;
+                    } else {
+                        //pager.totalPages(array.length);
+                        splicedArr = array.slice(0, (startIndex + pageSize - 1));
+                        return splicedArr;
+                    }
+                };
+
+                $scope.ganttOptions = {
+                    dataSource: bindDataSource(),
+                    dependencies: dependencies,
+                    dataBound: function () {
+                        var gantt = this;
+                        gantt.element.find(".k-task").each(function (e) {
+                            var dataItem = gantt.dataSource.getByUid($(this).attr("data-uid"));
+                            if (dataItem.isPSA == false) {
+                                this.style.backgroundColor = "gray";
+                                this.style.borderBottom = "solid 1px gray";
+                                this.style.borderTop = "solid 1px gray";
+                                this.style.borderRight = "solid 1px gray";
+                                this.style.borderLeft = "solid 1px gray";
+                                $(this).find(".k-task-complete").css("backgroundColor", "gray");
+                            } else {
+                                this.style.borderBottom = "solid 1px #ffc966";
+                                this.style.borderTop = "solid 1px#ffc966";
+                                this.style.borderRight = "solid 1px #ffc966";
+                                this.style.borderLeft = "solid 1px #ffc966";
+                                this.style.backgroundColor = "#ffc966";
+                                $(this).find(".k-task-complete").css("backgroundColor", "#ffc966");
+                            }
+                            $(this).find(".k-task-template")[0].style.borderRadius = "25px";
+                            $(this).find(".k-task-template").html(dataItem.title + "- Alloc " + (dataItem.percentComplete * 100) + "%");
+                        });
+                    },
+                    views: [
+                        "week",
+                        { type: "kendo.ui.GanttCustomView", title: "Month", selected: true }
+                    ],
+                    columns: [
+                        { field: "EMP_No", editable: true, title: "Emp No", width: 50, sortable: true, type: "number" },
+                        { field: "NAME", title: "Name", editable: true, width: 140, sortable: true, type: "string" },
+                        {
+                            field: "RESOURCE_REGION",
+                            title: "Resource Region",
+                            editable: true,
+                            width: 130,
+                            sortable: true,
+                            type: "string"
+                        },
+                        {
+                            field: "PROJECT_ROLE",
+                            title: "Project Role",
+                            editable: true,
+                            width: 90,
+                            sortable: true,
+                            type: "string"
+                        },
+                        {
+                            field: "ONSITE",
+                            title: "OnSite",
+                            editable: true,
+                            width: 60,
+                            sortable: true,
+                            type: "string"
+                        },
+                        {
+                            field: "PROJECT",
+                            title: "Project",
+                            editable: true,
+                            width: 100,
+                            sortable: true,
+                            type: "string"
+                        },
+                        {
+                            field: "CONFIRMATION_LEVEL",
+                            title: "Confirmation Level",
+                            editable: true,
+                            sortable: true,
+                            width: 100,
+                            type: "string"
+                        },
+                        {
+                            field: "RESOURCING_TEAM",
+                            title: "Resourcing Team",
+                            editable: true,
+                            sortable: true,
+                            width: 100,
+                            type: "string"
+                        },
+                        {
+                            field: "SKILL",
+                            title: "Skill",
+                            editable: true,
+                            width: 60,
+                            sortable: true,
+                            type: "string"
+                        },
+                        {
+                            field: "DESIGNATION",
+                            title: "Designation",
+                            editable: true,
+                            sortable: true,
+                            width: 100,
+                            type: "string"
+                        }
+                    ],
+                    height: 560,
+                    editable: {
+                        confirmation: true
+                    },
+                    showWorkHours: true,
+                    showWorkDays: true,
+                    resizable: true,
+                    add: onAdd,
+                    currentTimeMarker: false,
+                    toolbar: ["append", "pdf"],
+                    pdf: {
+                        fileName: "Kendo Gantt Chart Export.pdf",
+                        landscape: true,
+                        margin: {
+                            left: 10,
+                            right: 10,
+                            top: 10,
+                            bottom: 10
+                        }
+                    }
+                }
+                var pager = $("#pager").kendoPager({
+                    autoBind: false,
+                    dataSource: array,
+                    pageSizes: [10, 25, 50],
+                    pageSize: 10,
+                    buttonCount: 3,
+                    refresh: true,
+                    change: function () {
+                        if (initialDataLoad == false) {
+                            var arr = bindDataSource();
+                            $scope.ganttOptions.dataSource = arr;
+                            $('#gantt').data('kendoGrid').refresh();
+                            initialDataLoad =false;
+                        }
+                    }
+                }).data("kendoPager");
+                pager.totalPages(array.length);
+                pager.page(1);
+            });
+
+    $(document).bind("kendo:skinChange",
+        function() {
+            gantt.refresh();
+        });
+</script>
+
+
+</body>
+</html>
